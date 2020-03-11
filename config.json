@@ -1,0 +1,111 @@
+{
+  "name": "Custom Validate ID",
+  "namespace": "DCC\\CustomValidateID",
+  "description": "Create custom validation rules for IDs.",
+  "documentation": "README.md",
+  "versions": [
+    {
+      "0.1": "Initial Development Version on EMs"
+    }
+  ],
+  "authors": [
+    {
+      "name": "Greg Neils",
+      "email": "gneils@hotmail.com",
+      "institution": "Data Coordinating Center - Columbia University"
+    }
+  ],
+  "permissions": [
+    "redcap_add_edit_records_page"
+  ],
+  "enable-every-page-hooks-on-system-pages": false,
+  "project-settings": [
+    {
+      "key": "validation_enabled",
+      "name": "<strong>Enable ID Validation</strong>",
+      "required": false,
+      "type": "checkbox",
+      "repeatable": false
+    },
+    {
+      "key": "validation_require_submit",
+      "name": "<strong>Require Submit Button</strong><br>A submit button will be added where new IDs are created. Users will be required to press the submit button instead of enter, or clicking away.",
+      "required": false,
+      "type": "checkbox",
+      "repeatable": false
+    },
+    {
+      "key": "validation_format",
+      "name": "<strong>Exact Format</strong><br>Use the characters (#, $ and ?) to define a specific validation format.<br># = Any number, $ = Any letter (A-Z), ? = Any Character<br>Must match in both length and characters.<br>Example 1: ### will match three numbers like 123.<br>Example 2: $$$ will match three characters like aBc.<br>Example 3: ??? will match anything 3 characters long like 1A!  ",
+      "required": false,
+      "type": "text",
+      "repeatable": true
+    },
+    {
+      "key": "validation_format_begin",
+      "name": "<strong>Begins with</strong>... Separate multiple formats with a comma. <br>Format<br> (# = any number, $ = any letter, ? = Anything)",
+      "required": false,
+      "type": "text",
+      "repeatable": false
+    },
+    {
+      "key": "validation_format_end",
+      "name": "<strong>Ends with</strong>... <br>Separate multiple formats with a comma. <br> Available Format<br> (# = any number, $ = any letter, ? = Anything)",
+      "required": false,
+      "type": "text",
+      "repeatable": false
+    },
+    {
+      "key": "validation_regex",
+      "name": "<strong>Regular Expression</strong><br>Do not add forward slashes, /, at the beginning or end.<br><strong>Back slashes, &#92;, must be escaped.</strong><br> Example 1: [a-z] <br> Example 2: ^&#92;&#92;d{1,5}$<br>",
+      "required": false,
+      "type": "text",
+      "repeatable": false
+    },
+    {
+      "key": "validation_chars_min",
+      "name": "<strong>Minimum number of characters</strong>",
+      "required": false,
+      "type": "text",
+      "repeatable": false
+    },
+    {
+      "key": "validation_exact_num_chars",
+      "name": "<strong>Exact number of characters</strong>",
+      "required": false,
+      "type": "text",
+      "repeatable": false
+    },
+    {
+      "key": "validation_chars_custom",
+      "name": "<strong>Specify the characters the $ should allow.</strong><br>  No spaces, no commas, just the valid letters.  Example: JXT. Only the letters, J, X, and T will be allowed.  The order of the letters is <em>not</em> checked.",
+      "required": false,
+      "type": "text",
+      "repeatable": false
+    },
+    {
+      "key": "validation_invalid_message",
+      "name": "<strong>Message to display when invalid</strong>",
+      "required": false,
+      "type": "text",
+      "repeatable": false
+    },
+    {
+      "key": "validation_valid_message",
+      "name": "<strong>Message to display when valid.</strong>",
+      "required": false,
+      "type": "text",
+      "repeatable": false
+    }
+  ],
+  "system-settings": [
+  ],
+  "crons": [
+  ],
+  "compatibility": {
+    "php-version-min": "7.0.1",
+    "php-version-max": "",
+    "redcap-version-min": "9.2.1 ",
+    "redcap-version-max": ""
+  }
+}
