@@ -106,10 +106,9 @@ $(window).on("load", function () {
         validation.submitBtn = document.createElement("button");
         validation.submitBtn.setAttribute("id", "validationBtn");
         validation.submitBtn.setAttribute("disabled", "true");
-        validation.submitBtn.setAttribute("class", "btn btn-danger m-2 d-inline");
+        validation.submitBtn.setAttribute("class", "btn btn-xs btn-rcgreen m-2 d-inline");
         validation.submitBtn.setAttribute("onclick", "validation.requireSubmit = 0;");
-        validation.submitBtn.innerHTML = "Submit";
-
+        validation.submitBtn.innerHTML = '<i class="fas fa-plus"></i> Create';
 
         // display the formats
         validation.formatDisplay = "";

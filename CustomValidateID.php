@@ -165,22 +165,25 @@ class CustomValidateID extends AbstractExternalModule
         /** Wrap in jQuery onLoad.  All elements will be displayed on page */
         $jquery_onload_open = "$(window).on('load', function() {" . PHP_EOL;
         $jquery_onload_close = "});" . PHP_EOL;
+        $black = '#000';
+        $grey = '#222';
+        $white = '#eee';
 
         $cssBackground = '<style>' .
-            'body{color:#EEE; background-color:#000;}' . PHP_EOL .
-            '.menubox {background-color:#222;}' . PHP_EOL .
+            'body{color:#EEE; background-color:' . $black . ';}' . PHP_EOL .
+            '.menubox {background-color:' . $grey . ';}' . PHP_EOL .
             'A, A:visited, A:link {color: #eee;}' . PHP_EOL .
-            '.x-panel-header {background-color:#222; color:#eee; border-color:#000;}' . PHP_EOL .
+            '.x-panel-header {background-color:' . $grey . '; color:#eee; border-color:' . $black . ';}' . PHP_EOL .
             '#west .fas, #west .far, #west .fa { color: #555;}' . PHP_EOL .
-            '#west {border-color: #000; background-color:#222;}' . PHP_EOL .
-            '#south {border-color: #000; background-color:#000; color:#eee;}' . PHP_EOL .
-            '#center{background-color:#000;}' . PHP_EOL .
-            '#project-menu-logo {border-color:#000;}' . PHP_EOL .
+            '#west {border-color: ' . $black . '; background-color:' . $grey . ';}' . PHP_EOL .
+            '#south {border-color: ' . $black . '; background-color:' . $black . '; color:#eee;}' . PHP_EOL .
+            '#center{background-color:' . $black . ';}' . PHP_EOL .
+            '#project-menu-logo {border-color:' . $black . ';}' . PHP_EOL .
             '#subheader { background-image:none;}' . PHP_EOL .
-            '.projhdr{background-color:#000; color: #eee; border-color:#000;}' . PHP_EOL .
-            '.yellow{background-color:#000; color: #eee; border-color:#000;}' . PHP_EOL .
-            '.header{background-color:#000; color: #eee; border-color:#000;}' . PHP_EOL .
-            '.labelrc, .labelmatrix, .data, .data_matrix {background-color:#000;border-color:#000;}' . PHP_EOL .
+            '.projhdr{background-color:' . $black . '; color: #eee; border-color:' . $black . ';}' . PHP_EOL .
+            '.yellow{background-color:' . $black . '; color: #eee; border-color:' . $black . ';}' . PHP_EOL .
+            '.header{background-color:' . $black . '; color: #eee; border-color:' . $black . ';}' . PHP_EOL .
+            '.labelrc, .labelmatrix, .data, .data_matrix {background-color:' . $black . ';border-color:' . $black . ';}' . PHP_EOL .
             '</style>';
 
         /** echo debug info */
