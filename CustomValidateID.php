@@ -2,6 +2,7 @@
 
 namespace DCC\CustomValidateID;
 
+use Exception;
 use ExternalModules\AbstractExternalModule;
 use phpDocumentor\Reflection\Types\Boolean;
 use REDCap;
@@ -15,6 +16,9 @@ use REDCap;
 class CustomValidateID extends AbstractExternalModule
 {
 
+    /**
+     * @var
+     */
     private $validation_formats;
 
     /** @var integer $is_auto_inc
@@ -115,6 +119,9 @@ class CustomValidateID extends AbstractExternalModule
     /** @var integer $validation_chars_min number of characters the input must have */
     private $validation_chars_min;
 
+    /**
+     * CustomValidateID constructor.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -122,8 +129,26 @@ class CustomValidateID extends AbstractExternalModule
         $this->isDebug();
     }
 
+    /**
+     * @param int $project_id
+     * @param string|null $instrument
+     * @param int|null $event_id
+     */
     public function redcap_add_edit_records_page(int $project_id, string $instrument = null, int $event_id = null)
     {
+        print"";
+    }
+
+    /**
+     * @param int $project_id
+     */
+    function redcap_every_page_top(int $project_id)
+    {
+        // Only fire on pages where new IDs are created.
+        if (!$this->isPageCreateId()) {
+            return;
+        }
+
         /** initialize variables */
         $this->initialize_vars();
 
@@ -140,6 +165,27 @@ class CustomValidateID extends AbstractExternalModule
         print $this->js;
     }
 
+
+    /**
+     * Should validation exit?
+     * returns false if validation should not continue.  True if should continue
+     *
+     */
+    function run_validation()
+    {
+        /** @var string $project_id */
+        global $project_id;
+        if (!$this->isCustomValidationEnabled) {
+            return false;
+        }
+        if ($this->is_auto_inc) {
+            return false;
+        }
+        if (!$project_id) {
+            return false;
+        }
+        return true;
+    }
 
     /** set the character limit
      * returns integer or null  $limit
@@ -165,26 +211,6 @@ class CustomValidateID extends AbstractExternalModule
         /** Wrap in jQuery onLoad.  All elements will be displayed on page */
         $jquery_onload_open = "$(window).on('load', function() {" . PHP_EOL;
         $jquery_onload_close = "});" . PHP_EOL;
-        $black = '#000';
-        $grey = '#222';
-        $white = '#eee';
-
-        $cssBackground = '<style>' .
-            'body{color:#EEE; background-color:' . $black . ';}' . PHP_EOL .
-            '.menubox {background-color:' . $grey . ';}' . PHP_EOL .
-            'A, A:visited, A:link {color: #eee;}' . PHP_EOL .
-            '.x-panel-header {background-color:' . $grey . '; color:#eee; border-color:' . $black . ';}' . PHP_EOL .
-            '#west .fas, #west .far, #west .fa { color: #555;}' . PHP_EOL .
-            '#west {border-color: ' . $black . '; background-color:' . $grey . ';}' . PHP_EOL .
-            '#south {border-color: ' . $black . '; background-color:' . $black . '; color:#eee;}' . PHP_EOL .
-            '#center{background-color:' . $black . ';}' . PHP_EOL .
-            '#project-menu-logo {border-color:' . $black . ';}' . PHP_EOL .
-            '#subheader { background-image:none;}' . PHP_EOL .
-            '.projhdr{background-color:' . $black . '; color: #eee; border-color:' . $black . ';}' . PHP_EOL .
-            '.yellow{background-color:' . $black . '; color: #eee; border-color:' . $black . ';}' . PHP_EOL .
-            '.header{background-color:' . $black . '; color: #eee; border-color:' . $black . ';}' . PHP_EOL .
-            '.labelrc, .labelmatrix, .data, .data_matrix {background-color:' . $black . ';border-color:' . $black . ';}' . PHP_EOL .
-            '</style>';
 
         /** echo debug info */
         $debug_js = 'validation.debug = ';
@@ -309,8 +335,7 @@ class CustomValidateID extends AbstractExternalModule
             $valid_message . PHP_EOL .
             $invalid_message . PHP_EOL .
             $jquery_onload_close .
-            ' </script > ';
-        $js .= $cssBackground . PHP_EOL .
+            ' </script > ' .
             '<script  defer type="text/javascript" src="' . $this->validateJSURL .
             '"></script>' . PHP_EOL;
 
@@ -319,26 +344,8 @@ class CustomValidateID extends AbstractExternalModule
     }
 
     /**
-     * Should validation exit?
-     * returns false if validation should not continue.  True if should continue
-     *
+     * @throws Exception
      */
-    function run_validation()
-    {
-        /** @var string $project_id */
-        global $project_id;
-        if (!$this->isCustomValidationEnabled) {
-            return false;
-        }
-        if ($this->is_auto_inc) {
-            return false;
-        }
-        if (!$project_id) {
-            return false;
-        }
-        return true;
-    }
-
     private function initialize_vars()
     {
         global $is_auto_inc;
@@ -516,6 +523,9 @@ class CustomValidateID extends AbstractExternalModule
         }
     }
 
+    /**
+     *
+     */
     private function setTestValue()
     {
         // use the URL to set a test value
@@ -527,6 +537,10 @@ class CustomValidateID extends AbstractExternalModule
         }
     }
 
+    /**
+     * @param $value
+     * @return string|string[]|null
+     */
     private function sanitizeRegex($value)
     {
         // Characters that are not allowed: "/';
@@ -534,5 +548,20 @@ class CustomValidateID extends AbstractExternalModule
         $sanitizedString = strip_tags($value);
         $sanitizedString = preg_replace($notAllowed, '', $sanitizedString);
         return $sanitizedString;
+    }
+
+    /**
+     * @return bool  true=Page that new ID can be created.  false=page can not create a new ID.
+     */
+    private function isPageCreateId()
+    {
+        $x = basename(parse_url($_SERVER['REQUEST_URI'])['path']);
+
+        if ($x != 'record_home.php' && $x != 'record_status_dashboard.php') {
+            return false;
+        } else {
+            return true;
+        }
+
     }
 }

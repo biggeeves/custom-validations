@@ -108,7 +108,7 @@ $(window).on("load", function () {
         validation.submitBtn.setAttribute("disabled", "true");
         validation.submitBtn.setAttribute("class", "btn btn-xs btn-rcgreen m-2 d-inline");
         validation.submitBtn.setAttribute("onclick", "validation.requireSubmit = 0;");
-        validation.submitBtn.innerHTML = '<i class="fas fa-plus"></i> Create';
+        validation.submitBtn.innerHTML = '<i class="fas fa-plus"></i> Creator';
 
         // display the formats
         validation.formatDisplay = "";
@@ -121,6 +121,13 @@ $(window).on("load", function () {
 
     }
 
+    function removeREDCapCreateBtn() {
+        validation.createBtn = document.querySelector("div.input-group-append button");
+        if (validation.createBtn) {
+            validation.createBtn.remove();
+        }
+
+    }
 
     /** insert all nodes */
     function insertNodes() {
@@ -140,6 +147,7 @@ $(window).on("load", function () {
 
     /** Create all of the elements on the page */
     makeElements();
+    removeREDCapCreateBtn();
 
     /** Insert the elements into the page */
     insertNodes();
@@ -400,7 +408,7 @@ $(window).on("load", function () {
             validation.resultDiv.style.display = "none";
         }
         validation.submitBtn.removeAttribute("disabled");
-        validation.submitBtn.classList.remove("btn-danger");
+        validation.submitBtn.classList.remove("btn-rcgreen");
         validation.submitBtn.classList.add("btn-success");
 
         /**
@@ -419,13 +427,13 @@ $(window).on("load", function () {
         }
         if (validation.invalidMessage.length > 0) {
             validation.resultDiv.innerHTML = validation.invalidMessage;
-            validation.resultDiv.setAttribute("style", "background-color:#FFFFE0");
+//            validation.resultDiv.setAttribute("style", "background-color:#FFFFE0");
         } else {
             validation.resultDiv.style.display = "none";
         }
         validation.submitBtn.setAttribute("disabled", "true");
         validation.submitBtn.classList.remove("btn-success");
-        validation.submitBtn.classList.add("btn-danger");
+        validation.submitBtn.classList.add("btn-rcgreen");
     }
 
     function REDCapRedirct() {

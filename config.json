@@ -16,23 +16,20 @@
     }
   ],
   "permissions": [
-    "redcap_add_edit_records_page"
+    "redcap_add_edit_records_page",
+    "redcap_every_page_top"
   ],
   "enable-every-page-hooks-on-system-pages": false,
   "project-settings": [
     {
       "key": "validation_enabled",
       "name": "<strong>Enable ID Validation</strong>",
-      "required": false,
-      "type": "checkbox",
-      "repeatable": false
+      "type": "checkbox"
     },
     {
       "key": "validation_require_submit",
       "name": "<strong>Require Submit Button</strong><br>A submit button will be added where new IDs are created. Users will be required to press the submit button instead of enter, or clicking away.",
-      "required": false,
-      "type": "checkbox",
-      "repeatable": false
+      "type": "checkbox"
     },
     {
       "key": "validation_format",
@@ -45,57 +42,42 @@
       "key": "validation_format_begin",
       "name": "<strong>Begins with</strong>... Separate multiple formats with a comma. <br>Format<br> (# = any number, $ = any letter, ? = Anything)",
       "required": false,
-      "type": "text",
-      "repeatable": false
+      "type": "text"
     },
     {
       "key": "validation_format_end",
       "name": "<strong>Ends with</strong>... <br>Separate multiple formats with a comma. <br> Available Format<br> (# = any number, $ = any letter, ? = Anything)",
-      "required": false,
-      "type": "text",
-      "repeatable": false
+      "type": "text"
     },
     {
       "key": "validation_regex",
       "name": "<strong>Regular Expression</strong><br>Do not add forward slashes, /, at the beginning or end.<br><strong>Back slashes, &#92;, must be escaped.</strong><br> Example 1: [a-z] <br> Example 2: ^&#92;&#92;d{1,5}$<br>",
-      "required": false,
-      "type": "text",
-      "repeatable": false
+      "type": "text"
     },
     {
       "key": "validation_chars_min",
       "name": "<strong>Minimum number of characters</strong>",
-      "required": false,
-      "type": "text",
-      "repeatable": false
+      "type": "text"
     },
     {
       "key": "validation_exact_num_chars",
       "name": "<strong>Exact number of characters</strong>",
-      "required": false,
-      "type": "text",
-      "repeatable": false
+      "type": "text"
     },
     {
       "key": "validation_chars_custom",
       "name": "<strong>Specify the characters the $ should allow.</strong><br>  No spaces, no commas, just the valid letters.  Example: JXT. Only the letters, J, X, and T will be allowed.  The order of the letters is <em>not</em> checked.",
-      "required": false,
-      "type": "text",
-      "repeatable": false
+      "type": "text"
     },
     {
       "key": "validation_invalid_message",
       "name": "<strong>Message to display when invalid</strong>",
-      "required": false,
-      "type": "text",
-      "repeatable": false
+      "type": "textarea"
     },
     {
       "key": "validation_valid_message",
       "name": "<strong>Message to display when valid.</strong>",
-      "required": false,
-      "type": "text",
-      "repeatable": false
+      "type": "textarea"
     }
   ],
   "system-settings": [
