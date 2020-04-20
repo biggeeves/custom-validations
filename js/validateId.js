@@ -158,7 +158,6 @@ $(window).on("load", function () {
 
     defineCharacters();
 
-
     if (validation.debug) {
         console.log("Ran after add event listener");
         if (validation.testValue) {
@@ -202,10 +201,13 @@ $(window).on("load", function () {
             validation.results.beginsWith = beginsWith();
         }
 
+        // TODO
         if (validation.endsWith) {
             console.log("In endsWith");
             let formatLength = validation.endsWith.length;
-            validation.results.endsWith = validateFormats(validation.inputString.value.substr(0, formatLength), validation.endsWith);
+            validation.results.endsWith = validateFormats(validation.inputString.value.substr(formatLength, 1), validation.endsWith);
+            console.log("Ends with Result: " + validation.results.endsWith);
+
         }
 
 
@@ -341,18 +343,18 @@ $(window).on("load", function () {
             inputChar = value.charAt(i);
             console.log("Checking Character: " + i + " " + inputChar + "/" + checkChar);
             if (checkChar === validation.anyCharSymbol) {
-                console.log("?OK: " + i + " " + validation.anyCharSymbol);
+                console.log("Any Char OK: " + i + " " + validation.anyCharSymbol);
             } else if (checkChar === validation.numberSymbol && validation.numbers.includes(inputChar)) {
                 // Check Numbers
-                console.log("$OK: " + i);
+                console.log("Numbers OK: " + i);
                 isValid = true;
             } else if (checkChar === validation.letterSymbol && validation.strings.includes(inputChar)) {
                 // Check Strings
-                console.log("#OK: " + i);
+                console.log("Letter OK: " + i);
                 isValid = true;
             } else if (inputChar === checkChar) {
                 // Does not match the exact character
-                console.log("ExactOK: " + i);
+                console.log("Exact OK: " + i);
                 isValid = true;
             } else {
                 isValid = false;
@@ -402,10 +404,10 @@ $(window).on("load", function () {
         }
         if (validation.validMessage.length > 0) {
             validation.resultDiv.innerHTML = validation.validMessage;
-            validation.resultDiv.setAttribute("style", "background-color:lightgreen");
+            // validation.resultDiv.setAttribute("style", "background-color:lightgreen");
         } else {
             validation.resultDiv.setAttribute("style", "background-color:blue");
-            validation.resultDiv.style.display = "none";
+            // validation.resultDiv.style.display = "none";
         }
         validation.submitBtn.removeAttribute("disabled");
         validation.submitBtn.classList.remove("btn-rcgreen");

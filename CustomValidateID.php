@@ -399,7 +399,6 @@ class CustomValidateID extends AbstractExternalModule
         }
 
         /** Get exact number of characters*/
-        // TODO when a user mistakenly enters in a string value, javascript fails.
         $this->validation_exact_num_chars = intval(
             AbstractExternalModule::getProjectSetting('validation_exact_num_chars', $project_id));
 
