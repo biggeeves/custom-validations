@@ -1,16 +1,3 @@
-# CustomValidateID
-<style>
-body {font-family: sans-serif}
-h3 {
-font-style: italic;
-margin-bottom: .5em;
-}
-.boxed {
-border: 1px solid grey;
-margin: 25px;
-padding: 25px;
-}
-</style>
 This module validates IDs based on custom rules.
 
 
@@ -145,7 +132,6 @@ Text that is displayed when the ID is in the proper format.<br>
 <strong>Example:</strong> Press the submit button to continue.
 
 <h3 style="text-align:center;">Advanced Settings</h3>
-<div class="boxed">
 <h3>Defining your own characters for $</h3>
 The $ defaults to the letters A thru Z both upper case and lower case.<br>  
 This can be overwritten by supplying your own characters.<br>
@@ -160,6 +146,3 @@ Invalid letters: All other letters such as B, E and R.<br></p>
 The character &Aacute; and &Yacute; are the only allowable characters.<br>
 Valid: &Yacute; and or &Aacute;<br>
 Invalid: All other characters.</p>
-</div> 
-
-
